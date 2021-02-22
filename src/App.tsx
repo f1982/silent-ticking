@@ -1,19 +1,32 @@
 import React from 'react';
 import styled from 'styled-components'
-import './App.css';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 import Clock from 'react-live-clock';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+`
+
 const StyledClock = styled(Clock)`
-  font-size: 90px;
+  font-size: 120px;
+  font-family: "Montserrat"
 `
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Wrapper>
+      <Paper>
+       <Box p={6}> 
         <StyledClock format={'HH:mm:ss'} ticking={true} timezone={'Pacific/Auckland'} />
-      </header>
-    </div>
+       </Box>
+      </Paper>
+    </Wrapper>
   );
 }
 
