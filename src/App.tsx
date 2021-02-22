@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 `
 
 const StyledClock = styled(Clock)`
-  font-size: 120px;
+  font-size: 6rem;
   font-family: "Montserrat"
 `
 
