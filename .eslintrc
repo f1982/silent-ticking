@@ -1,0 +1,176 @@
+{
+  //extends 属性值可以是一个字符串或字符串数组，数组中每个配置项继承它前面的配置，
+  //可以对继承的规则进行修改、覆盖和拓展。比如我们的 extends 就继承了 Airbnb 的配置规则。
+  "extends": [
+    "react-app",
+    "standard",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "standard",
+    "react-hooks"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  // 于指定环境，每个环境都有自己预定义的全局变量，可以同时指定多个环境，不矛盾。
+  // 如 console 属性只有在 browser 环境下才会存在，
+  // 如果不设置支持browser，那么可能会console is undefined。
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "semi": false,
+        "useTabs": false,
+        "bracketSpacing": true,
+        "arrowParens": "avoid",
+        "spaceBeforeFunctionParen": false
+      }
+    ],
+    "no-tabs": 0,
+    "import/no-unresolved": 0,
+    "import/extensions": 0,
+    "arrow-body-style": [
+      "off",
+      "as-needed"
+    ],
+    "comma-dangle": [
+      "off"
+    ],
+    "import/first": [
+      "off"
+    ],
+    "import/no-extraneous-dependencies": [
+      "off"
+    ],
+    "import/no-named-default": [
+      "error"
+    ],
+    "new-cap": [
+      "off"
+    ],
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-multi-assign": [
+      "warn"
+    ],
+    "no-plusplus": [
+      "warn",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-restricted-syntax": [
+      "error"
+    ],
+    "no-trailing-spaces": [
+      "off"
+    ],
+    "no-underscore-dangle": [
+      "off"
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
+    "no-nested-ternary": [
+      "off"
+    ],
+    "object-curly-spacing": [
+      "off"
+    ],
+    "padded-blocks": [
+      "off"
+    ],
+    "react/forbid-prop-types": [
+      "off"
+    ],
+    "react/jsx-boolean-value": [
+      "warn"
+    ],
+    "react/jsx-filename-extension": [
+      "off"
+    ],
+    "react/jsx-max-props-per-line": [
+      "off"
+    ],
+    "react/no-array-index-key": [
+      "off"
+    ],
+    "react/no-deprecated": [
+      "warn"
+    ],
+    "react/no-find-dom-node": [
+      "warn"
+    ],
+    "react/no-string-refs": [
+      "warn"
+    ],
+    "react/no-unescaped-entities": [
+      "warn"
+    ],
+    "react/no-unused-prop-types": [
+      "off"
+    ],
+    "react/prefer-es6-class": [
+      "off"
+    ],
+    "react/prefer-stateless-function": [
+      "off"
+    ],
+    "react/require-default-props": [
+      "off"
+    ]
+  },
+  "overrides": [
+    {
+      "files": "test/**/*.js",
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": [
+        "*.tsx"
+      ],
+      "rules": {
+        "react/prop-types": [
+          "off"
+        ]
+      }
+    }
+  ]
+}

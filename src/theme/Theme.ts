@@ -29,7 +29,7 @@ const palette = createPalette({
   divider: '#d2d2d2'
 })
 
-const typography = createTypography(palette, {
+export const typography = createTypography(palette, {
   fontFamily: [
     'Montserrat',
     '-apple-system',
@@ -76,7 +76,10 @@ const typography = createTypography(palette, {
 })
 
 const lightTheme = createMuiTheme({
-  palette,
+  palette: {
+    type: 'light',
+    divider: '#666666'
+  },
   typography,
   spacing: 8,
   shape: {

@@ -7,19 +7,20 @@ import GlobalStyle from './theme/GlobalStyles'
 import { darkTheme, lightTheme } from './theme/Theme'
 
 interface Props {
+  mode: string
   children: React.ReactNode
 }
 
-const Providers: React.FC<Props> = ({ children }: Props) => {
-  const theme = darkTheme
-  // const theme = lightTheme
+const Providers: React.FC<Props> = ({ children, mode }: Props) => {
+  console.log('Providers mode', mode)
+  const theme = mode === 'dark' ? darkTheme : lightTheme
   return (
     <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-            {children}
-            <GlobalStyle />
+          {children}
+          <GlobalStyle />
         </ThemeProvider>
       </MuiThemeProvider>
     </StylesProvider>
