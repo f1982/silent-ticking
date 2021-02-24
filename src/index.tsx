@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import CustomThemeProvider from './CustomThemeProvider'
+
+import { themes } from './theme/themes'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CustomThemeProvider themes={themes}>
+      <App />
+    </CustomThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
