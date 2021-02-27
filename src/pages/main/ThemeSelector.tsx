@@ -1,8 +1,6 @@
-import React, { useContext } from 'react'
-import Switch from '@material-ui/core/Switch'
-import Box from '@material-ui/core/Box'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-
+import Switch from '@material-ui/core/Switch'
+import React, { useContext } from 'react'
 import { CustomThemeContext } from '../../theme/CustomThemeProvider'
 
 const ThemeSelector = () => {
