@@ -4,7 +4,7 @@ import createTypography from '@material-ui/core/styles/createTypography'
 
 export const typography = createTypography(createPalette({}), {
   fontFamily: [
-    "'Major Mono Display', monospace",
+    'Montserrat',
     '-apple-system',
     'BlinkMacSystemFont',
     '"Segoe UI"',
@@ -57,9 +57,18 @@ const breakpoints = createBreakpoints({})
 
 export const overrideTypography = {
   h1: {
-    fontSize: pxToRem(60),
+    fontSize: pxToRem(52), // < md
+    [breakpoints.up('sm')]: {
+      fontSize: pxToRem(78) // >md
+    },
     [breakpoints.up('md')]: {
-      fontSize: pxToRem(90)
+      fontSize: pxToRem(120) // >md
+    }
+  },
+  h3: {
+    fontSize: pxToRem(15),
+    [breakpoints.up('md')]: {
+      fontSize: pxToRem(18)
     }
   }
 }

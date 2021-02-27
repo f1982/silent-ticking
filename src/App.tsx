@@ -1,23 +1,20 @@
-import Paper from '@material-ui/core/Paper'
 import React from 'react'
 import styled from 'styled-components'
 import Main from './pages/main/Main'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
-const Wrapper = styled(Paper)`
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const Full = styled(FullScreen)`
   width: 100%;
-  height: 100vh;
+  height: 100%;
 `
-
 function App() {
+  const handle = useFullScreenHandle()
   return (
-    <Wrapper>
-      <Main />
-    </Wrapper>
+    <>
+      <Full handle={handle}>
+        <Main fullscreenHandler={handle} />
+      </Full>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@material-ui/core/Box'
 import Divider from '@material-ui/core/Divider'
 import Drawer, { DrawerProps } from '@material-ui/core/Drawer'
@@ -10,32 +10,52 @@ import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import ThemeSelector from './ThemeSelector'
+import { UserSettings } from '../../types/settings'
 
 interface RightDrawerProps extends DrawerProps {
   onClose: () => void
-  onSettingUpdate?: (key: string, value: string) => void
+  settings: UserSettings
+  onSettingUpdate: (setting: Object) => void
 }
-const RightDrawer: React.FC<RightDrawerProps> = ({ onClose, ...rest }) => {
-  const [value, setValue] = useState('24h')
+const RightDrawer: React.FC<RightDrawerProps> = ({
+  onClose,
+  settings,
+  onSettingUpdate,
+  ...rest
+}) => {
+  const [timeFormat, setTimeFormat] = useState('24h')
   const [showSecond, setShowSecond] = useState(true)
   const [showDate, setShowDate] = useState(true)
 
-  const updateSetting = () => {
-    // onSettingUpdate()
-  }
+  useEffect(() => {
+    setTimeFormat(settings.timeFormat)
+    setShowSecond(settings.showSecond)
+  }, [settings])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTimeFormatChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = (event.target as HTMLInputElement).value
-    console.log('value', value)
-    setValue(value)
+    setTimeFormat(value)
+    if (onSettingUpdate) onSettingUpdate({ timeFormat: value })
   }
 
-  const handleShowSecond = () => {
-    setShowSecond(val => !val)
+  const handleShowSecondChange = (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => {
+    // console.log('checked', checked)
+    // console.log('evt', evt.target.value)
+    setShowSecond(checked)
+    onSettingUpdate({ showSecond: checked })
   }
 
-  const handleShowDate = () => {
-    setShowDate(val => !val)
+  const handleShowDateChange = (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => {
+    setShowDate(checked)
+    onSettingUpdate({ showDate: checked })
   }
 
   return (
@@ -61,8 +81,8 @@ const RightDrawer: React.FC<RightDrawerProps> = ({ onClose, ...rest }) => {
         <RadioGroup
           aria-label='gender'
           name='gender1'
-          value={value}
-          onChange={handleChange}>
+          value={timeFormat}
+          onChange={handleTimeFormatChange}>
           <Box display='flex' p={3}>
             <FormControlLabel value='12h' control={<Radio />} label='12H' />
             <Box ml={5}>
@@ -78,7 +98,7 @@ const RightDrawer: React.FC<RightDrawerProps> = ({ onClose, ...rest }) => {
               <Switch
                 title='second'
                 checked={showSecond}
-                onChange={handleShowSecond}
+                onChange={handleShowSecondChange}
               />
             }
             label=''
@@ -95,7 +115,7 @@ const RightDrawer: React.FC<RightDrawerProps> = ({ onClose, ...rest }) => {
               <Switch
                 title='second'
                 checked={showDate}
-                onChange={handleShowDate}
+                onChange={handleShowDateChange}
               />
             }
             label=''

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-
+import GlobalStyle from './GlobalStyles'
 // eslint-disable-next-line no-unused-vars
 
 interface ThemeContext {
@@ -46,6 +46,7 @@ const CustomThemeProvider: React.FC<CustomThemeProviderProps> = ({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {children}
+          <GlobalStyle />
         </ThemeProvider>
       </MuiThemeProvider>
     </CustomThemeContext.Provider>
