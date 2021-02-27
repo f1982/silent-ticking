@@ -16,21 +16,18 @@ const ThemeSelector = () => {
 
     return (
       <>
-        <Box>
-          <FormControlLabel
-            control={
-              <Switch
-                title={currentTheme}
-                checked={currentTheme === 'dark'}
-                onChange={handleThemeChange}
-              />
-            }
-            label=''
-          />
-        </Box>
-        <Box ml={5} display='flex' alignItems='center'>
-          {currentTheme}
-        </Box>
+        <FormControlLabel
+          control={
+            <Switch
+              title={currentTheme}
+              checked={currentTheme === 'dark'}
+              onChange={handleThemeChange}
+            />
+          }
+          style={{ width: `100%` }}
+          labelPlacement='end'
+          label={currentTheme}
+        />
       </>
     )
   }

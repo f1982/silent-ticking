@@ -5,8 +5,8 @@
       "white": "rgba(255, 116, 116, 1)"
     },
     "background": {
-      "paper": "rgba(39, 39, 39, 1)",
-      "default": "#000000"
+      "paper": "#000000",
+      "default": "#272727"
     },
     "primary": {
       "light": "#7986cb",
