@@ -1,7 +1,7 @@
-import React, { useState, useEffect, ReactNode, ReactElement } from 'react'
-import styled from 'styled-components'
 import moment from 'moment'
 import 'moment-timezone'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { breakpoints } from '../utils/styledBreakpoints'
 
 const DebugMode = false
@@ -39,8 +39,6 @@ interface ClockProps {
   showSecond: boolean
   family?: string
   blinkSeparator?: boolean
-  digital?: ReactElement | null
-  separator?: ReactNode | null
   tickHandler?: (second: number) => void | null
 }
 
@@ -48,8 +46,6 @@ const Clock: React.FC<ClockProps> = ({
   hourFormat = '12h',
   showSecond,
   blinkSeparator = true,
-  digital: Digital = null,
-  separator = null,
   tickHandler = null
 }) => {
   const [time, setTime] = useState<string[]>([])
@@ -78,6 +74,7 @@ const Clock: React.FC<ClockProps> = ({
       updateInterval()
     }, intervalDuration)
     return () => clearInterval(timer)
+    // eslint-disable-next-line
   }, [showSecond, hourFormat])
 
   const getSeparator = () => {
