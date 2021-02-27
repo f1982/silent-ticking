@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import Drawer, { DrawerProps } from '@material-ui/core/Drawer'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -9,14 +11,20 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import Switch from '@material-ui/core/Switch'
 import Typography from '@material-ui/core/Typography'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
+import LocalCafeIcon from '@material-ui/icons/LocalCafe'
+
 import ThemeSelector from './ThemeSelector'
 import { UserSettings } from '../../types/settings'
 
+const SettingRow = styled(Box)`
+  padding: 10px 0 10px 0;
+`
 interface RightDrawerProps extends DrawerProps {
   onClose: () => void
   settings: UserSettings
   onSettingUpdate: (setting: Object) => void
 }
+
 const RightDrawer: React.FC<RightDrawerProps> = ({
   onClose,
   settings,
@@ -44,8 +52,6 @@ const RightDrawer: React.FC<RightDrawerProps> = ({
     evt: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
-    // console.log('checked', checked)
-    // console.log('evt', evt.target.value)
     setShowSecond(checked)
     onSettingUpdate({ showSecond: checked })
   }
@@ -60,39 +66,46 @@ const RightDrawer: React.FC<RightDrawerProps> = ({
 
   return (
     <Drawer anchor={'right'} {...rest}>
-      <Box p={3} display='flex' height='100vh' flexDirection='column'>
-        <Box
-          pl={3}
-          pr={3}
-          pt={3}
-          width='30vw'
-          display='flex'
-          flexDirection='row'
-          alignItems='center'
-          justifyContent='space-between'>
-          <Typography>
-            <strong>Silent Ticking</strong>
-          </Typography>
-          <IconButton onClick={onClose}>
-            <HighlightOffIcon color='primary' fontSize='large' />
-          </IconButton>
-        </Box>
+      <Box
+        p={4.2}
+        display='flex'
+        height='100%'
+        width='300px'
+        flexDirection='column'>
+        <SettingRow>
+          <Box
+            display='flex'
+            flexDirection='row'
+            alignItems='center'
+            justifyContent='space-between'>
+            <Typography variant='h5' component='h1'>
+              Silent Ticking
+            </Typography>
+            <Box flex={1} />
+            <IconButton onClick={onClose}>
+              <HighlightOffIcon color='primary' fontSize='large' />
+            </IconButton>
+          </Box>
+        </SettingRow>
 
-        <RadioGroup
-          aria-label='gender'
-          name='gender1'
-          value={timeFormat}
-          onChange={handleTimeFormatChange}>
-          <Box display='flex' p={3}>
-            <FormControlLabel value='12h' control={<Radio />} label='12H' />
-            <Box ml={5}>
+        <Box height='30px' />
+
+        <SettingRow>
+          <RadioGroup
+            aria-label='hour-format'
+            name='hour-format'
+            value={timeFormat}
+            onChange={handleTimeFormatChange}>
+            <Box display='flex'>
+              <FormControlLabel value='12h' control={<Radio />} label='12H' />
+              <Box flex={1} />
               <FormControlLabel value='24h' control={<Radio />} label='24H' />
             </Box>
-          </Box>
-        </RadioGroup>
+          </RadioGroup>
+        </SettingRow>
         <Divider />
 
-        <Box display='flex' p={3}>
+        <SettingRow>
           <FormControlLabel
             control={
               <Switch
@@ -101,15 +114,14 @@ const RightDrawer: React.FC<RightDrawerProps> = ({
                 onChange={handleShowSecondChange}
               />
             }
-            label=''
+            style={{ width: `100%` }}
+            labelPlacement='end'
+            label='Show Second'
           />
-          <Box ml={5} display='flex' alignItems='center'>
-            Show Second
-          </Box>
-        </Box>
+        </SettingRow>
         <Divider />
 
-        <Box display='flex' p={3}>
+        <SettingRow>
           <FormControlLabel
             control={
               <Switch
@@ -118,31 +130,44 @@ const RightDrawer: React.FC<RightDrawerProps> = ({
                 onChange={handleShowDateChange}
               />
             }
-            label=''
+            style={{ width: `100%` }}
+            labelPlacement='end'
+            label='Show Date'
           />
-          <Box ml={5} display='flex' alignItems='center'>
-            Show Date
-          </Box>
-        </Box>
+        </SettingRow>
         <Divider />
 
-        <Box display='flex' p={3}>
+        <SettingRow>
           <ThemeSelector />
-        </Box>
+        </SettingRow>
         <Divider />
 
         <Box flex={1} />
-        <Box p={3} display='flex' flexDirection='row'>
-          <Box display='flex' flexDirection='column'>
-            <Typography>Designer</Typography>
-            <Typography>Jerry</Typography>
+
+        <SettingRow>
+          <Box display='flex' flexDirection='row'>
+            <Box display='flex' flexDirection='column'>
+              <Typography>Designer</Typography>
+              <Typography>Jerry</Typography>
+            </Box>
+            <Box display='flex' ml={3} flexDirection='column'>
+              <Typography>Developer</Typography>
+              <Typography>Andy</Typography>
+            </Box>
           </Box>
-          <Box display='flex' ml={3} flexDirection='column'>
-            <Typography>Developer</Typography>
-            <Typography>Andy</Typography>
-          </Box>
-        </Box>
-        <Box p={3}>
+        </SettingRow>
+
+        <SettingRow>
+          <Button
+            variant='outlined'
+            href='https://www.buymeacoffee.com/jerryandy'
+            size='small'
+            startIcon={<LocalCafeIcon />}
+            color='primary'>
+            Buy me a Coffee
+          </Button>
+        </SettingRow>
+        <Box>
           <Typography>Copyright 2020</Typography>
         </Box>
       </Box>
