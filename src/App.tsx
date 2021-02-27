@@ -1,20 +1,21 @@
-import React from 'react';
+import React from 'react'
 import styled from 'styled-components'
-import './App.css';
-import Clock from 'react-live-clock';
+import Main from './pages/main/Main'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
-const StyledClock = styled(Clock)`
-  font-size: 90px;
+const Full = styled(FullScreen)`
+  width: 100%;
+  height: 100%;
 `
-
 function App() {
+  const handle = useFullScreenHandle()
   return (
-    <div className="App">
-      <header className="App-header">
-        <StyledClock format={'HH:mm:ss'} ticking={true} timezone={'Pacific/Auckland'} />
-      </header>
-    </div>
-  );
+    <>
+      <Full handle={handle}>
+        <Main fullscreenHandler={handle} />
+      </Full>
+    </>
+  )
 }
 
-export default App;
+export default App
