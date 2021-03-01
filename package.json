@@ -22,6 +22,12 @@
   "devDependencies": {
     "@commitlint/cli": "9.0.1",
     "@commitlint/config-conventional": "9.0.1",
+    "@storybook/addon-actions": "^6.1.20",
+    "@storybook/addon-essentials": "^6.1.20",
+    "@storybook/addon-links": "^6.1.20",
+    "@storybook/node-logger": "^6.1.20",
+    "@storybook/preset-create-react-app": "^3.1.6",
+    "@storybook/react": "^6.1.20",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -58,7 +64,9 @@
     "eject": "react-scripts eject",
     "eslint:check": "eslint src --ext .js,.jsx,.ts,.tsx",
     "stylelint": "stylelint 'src/**/*.tsx'",
-    "deploy": "./deploy-to-ghpages.sh"
+    "deploy": "./deploy-to-ghpages.sh",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
