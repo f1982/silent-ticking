@@ -1,22 +1,27 @@
-import moment from 'moment'
-import 'moment-timezone'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { breakpoints } from '../utils/styledBreakpoints'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { breakpoints } from '../utils/styledBreakpoints'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Box from '@material-ui/core/Box'
 
-const DebugMode = false
 const intervalDuration = 1000
-const dayTime = moment().format('A')
 
-const getTimezone = () => {
-  return Intl.DateTimeFormat().resolvedOptions().timeZone as string
+export enum CountdownStyles {
+  PROGRESS = 'progress',
+  CIRCLE = 'circle',
+  DIGITAL = 'digital'
 }
-
+const CountdownWrapper = styled.div``
 const Wrapper = styled.div`
   position: relative;
-  width: auto;
   text-align: center;
+`
+
+const ProgressWrapper = styled.div`
+  width: 500px;
+  display: flex;
+  flex-direction: column;
 `
 const SeparatorContainer = styled.span`
   display: inline-block;
@@ -50,18 +55,19 @@ const IconContainer = styled.div`
 function pad(num: number) {
   return ('0' + num).slice(-2)
 }
+
 function hhmmss(secs: number) {
-  var minutes = Math.floor(secs / 60)
+  const minutes = Math.floor(secs / 60)
   secs = secs % 60
-  var hours = Math.floor(minutes / 60)
-  minutes = minutes % 60
+  // const hours = Math.floor(minutes / 60)
+  // minutes = minutes % 60
   return `${pad(minutes)}:${pad(secs)}`
   // return `${pad(hours)}:${pad(minutes)}:${pad(secs)}`
 }
 
 export interface CountdownProps {
   time: number
-  format: string
+  format: 'digital' | 'progress' | 'circle'
   blink?: boolean
   children?: React.ReactNode
   onTimeUp?: () => void
@@ -69,13 +75,12 @@ export interface CountdownProps {
 
 const Countdown: React.FC<CountdownProps> = ({
   time = 25 * 60,
-  format = 's',
+  format = 'digital',
   blink = true,
   children = null,
   onTimeUp
 }) => {
   const [currentTime, setCurrentTime] = useState<number>(time)
-  const [count, setCount] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -88,7 +93,7 @@ const Countdown: React.FC<CountdownProps> = ({
           return 0
         }
       })
-    }, 1000)
+    }, intervalDuration)
     return () => clearInterval(interval)
   }, [])
 
@@ -119,25 +124,54 @@ const Countdown: React.FC<CountdownProps> = ({
               </React.Fragment>
             )
           })}
-        `{total - current}/{total}``
       </div>
     )
   }
 
-  return (
-    <div>
-      {getDigitalMode(currentTime, time)}
+  const getCircleMode = (current: number, total: number) => {
+    return (
       <Wrapper>
         <CircularProgress
           style={{ margin: `0 auto` }}
           variant='determinate'
-          size={120}
-          value={(time - currentTime / time) * 100}
+          size={234}
+          value={(total - current / total) * 100}
         />
         {children && <IconContainer>{children}</IconContainer>}
       </Wrapper>
-    </div>
-  )
+    )
+  }
+
+  const getProgressMode = (current: number, total: number) => {
+    return (
+      <ProgressWrapper>
+        <LinearProgress
+          style={{ width: '100%', height: '3rem' }}
+          variant='determinate'
+          color='secondary'
+          value={(1 - current / total) * 100}
+        />
+        {children && (
+          <Box display='flex' mt={2} justifyContent='center'>
+            {children}
+          </Box>
+        )}
+      </ProgressWrapper>
+    )
+  }
+
+  const getCountdown = (format: string) => {
+    switch (format) {
+      case 'digital':
+        return getDigitalMode(currentTime, time)
+      case 'progress':
+        return getProgressMode(currentTime, time)
+      default:
+        return getCircleMode(currentTime, time)
+    }
+  }
+
+  return <CountdownWrapper>{getCountdown(format)}</CountdownWrapper>
 }
 
 export default Countdown

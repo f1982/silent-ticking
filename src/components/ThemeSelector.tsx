@@ -1,7 +1,7 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import React, { useContext } from 'react'
-import { CustomThemeContext } from '../../theme/CustomThemeProvider'
+import { CustomThemeContext } from '../theme/CustomThemeProvider'
 
 const ThemeSelector = () => {
   const context = useContext(CustomThemeContext)

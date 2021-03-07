@@ -13,8 +13,8 @@ import Typography from '@material-ui/core/Typography'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import LocalCafeIcon from '@material-ui/icons/LocalCafe'
 
-import ThemeSelector from './ThemeSelector'
-import { UserSettings } from '../../types/settings'
+import ThemeSelector from '../../components/ThemeSelector'
+import { UserSettings } from '../../types/types'
 
 const SettingRow = styled(Box)`
   padding: 10px 0 10px 0;

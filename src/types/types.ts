@@ -16,6 +16,19 @@ export interface UserSettings {
   blinkSeparator: boolean
 }
 
+export interface PomodoroSession {
+  sessionName: string
+  time: number
+}
+
+export interface UserPomodoroSettings {
+  sessionName: string
+  display: 'progress' | 'circle' | 'digital'
+  sessionDuration: number
+  break: number
+  sharing: number
+}
+
 export const DefaultUserSettings: UserSettings = {
   timeFormat: '24h',
   showSecond: true,
