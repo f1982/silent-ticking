@@ -80,22 +80,23 @@ const Countdown: React.FC<CountdownProps> = ({
   children = null,
   onTimeUp
 }) => {
-  const [currentTime, setCurrentTime] = useState<number>(time)
+  const [currentTime, setCurrentTime] = useState<number>(0)
 
   useEffect(() => {
+    setCurrentTime(time)
     const interval = setInterval(() => {
       setCurrentTime((seconds: number) => {
         if (seconds > 1) {
           return seconds - 1
         } else {
           clearInterval(interval)
-          if (onTimeUp) onTimeUp()
+          if (onTimeUp && time > 0) onTimeUp()
           return 0
         }
       })
     }, intervalDuration)
     return () => clearInterval(interval)
-  }, [])
+  }, [time, onTimeUp])
 
   const getSeparator = () => {
     if (!blink) {

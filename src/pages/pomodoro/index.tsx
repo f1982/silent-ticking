@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import Countdown, { CountdownStyles } from '../../components/Countdown'
 import PomodoroSettings from './PomodoroSettings'
 import RepeatIcon from '@material-ui/icons/Repeat'
+import { Button } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,10 +28,16 @@ const CountdownStyleList = [
 
 const Pomodoro: React.FC<PomodoroProps> = () => {
   const [styleIndex, setStyleIndex] = useState(0)
+  const [countTime, setCountTime] = useState(0)
 
   return (
     <Wrapper>
-      <Countdown format={CountdownStyleList[styleIndex]} time={100}>
+      <Countdown
+        format={CountdownStyleList[styleIndex]}
+        onTimeUp={() => {
+          alert('you finished a pomodoro time, congratulations!')
+        }}
+        time={countTime}>
         <DirectionsRunIcon fontSize='large' />
       </Countdown>
       <IconButton
@@ -40,6 +48,20 @@ const Pomodoro: React.FC<PomodoroProps> = () => {
         }}>
         <RepeatIcon color='secondary' fontSize='large' />
       </IconButton>
+      <Box display='flex' flexDirection='row'>
+        <Button
+          onClick={() => {
+            setCountTime(25 * 60)
+          }}>
+          25m
+        </Button>
+        <Button
+          onClick={() => {
+            setCountTime(10)
+          }}>
+          10s
+        </Button>
+      </Box>
     </Wrapper>
   )
 }
