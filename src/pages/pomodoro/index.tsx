@@ -1,14 +1,11 @@
-import Drawer from '@material-ui/core/Drawer'
+import { Button } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 import IconButton from '@material-ui/core/IconButton'
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun'
-import MenuIcon from '@material-ui/icons/Menu'
+import RepeatIcon from '@material-ui/icons/Repeat'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownStyles } from '../../components/Countdown'
-import PomodoroSettings from './PomodoroSettings'
-import RepeatIcon from '@material-ui/icons/Repeat'
-import { Button } from '@material-ui/core'
-import Box from '@material-ui/core/Box'
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,14 +1,10 @@
 import Box from '@material-ui/core/Box'
 import { DrawerProps } from '@material-ui/core/Drawer'
-import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
-import OutlinedInput from '@material-ui/core/OutlinedInput'
 import TextField from '@material-ui/core/TextField'
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import { UserSettings } from '../../types/types'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import { pomodoroSessions } from '../../config'
 
 const SettingRow = styled(Box)`
@@ -20,60 +16,19 @@ const StyledFieldLabel = styled(TextField)`
     border: 1px solid #636363;
   }
 `
-const StyledOutFieldLabel = styled(OutlinedInput)`
-  .MuiOutlinedInput-root {
-  }
-  & fieldset {
-    color: #ffcc00;
-    border: 1px solid #636363;
-  }
-  & span {
-    color: #ffcc00;
-  }
-`
-interface RightDrawerProps extends DrawerProps {
-  // onClose: () => void
-  // settings: UserSettings
-  // onSettingUpdate: (setting: Object) => void
-}
 
-const PomodoroSetting: React.FC<RightDrawerProps> = (
-  {
-    // onClose,
-    // settings,
-    // onSettingUpdate,
-    // ...rest
-  }
-) => {
-  const [timeFormat, setTimeFormat] = useState('24h')
-  const [showSecond, setShowSecond] = useState(true)
+interface RightDrawerProps extends DrawerProps {}
+
+const PomodoroSetting: React.FC<RightDrawerProps> = () => {
   const [session, setSession] = useState('')
-
-  useEffect(() => {
-    // setTimeFormat(settings.timeFormat)
-    // setShowSecond(settings.showSecond)
-  }, [])
 
   const handleSessionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = (event.target as HTMLInputElement).value
     setSession(value)
   }
 
-  const handleShowSecondChange = (
-    evt: React.ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
-    setShowSecond(checked)
-    // onSettingUpdate({ showSecond: checked })
-  }
-
   return (
-    <Box
-      p={4.2}
-      display='flex'
-      height='100%'
-      width='300px'
-      flexDirection='column'>
+    <Box display='flex' height='100%' flexDirection='column'>
       <SettingRow>
         <StyledFieldLabel
           fullWidth

@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import Box from '@material-ui/core/Box'
-import Drawer, { DrawerProps } from '@material-ui/core/Drawer'
+import Divider from '@material-ui/core/Divider'
+import { DrawerProps } from '@material-ui/core/Drawer'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import IconButton from '@material-ui/core/IconButton'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Switch from '@material-ui/core/Switch'
-import Typography from '@material-ui/core/Typography'
-
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import ThemeSelector from '../../components/ThemeSelector'
 import { DefaultUserSettings, UserSettings } from '../../types/types'
-import Divider from '@material-ui/core/Divider'
 
 const SettingRow = styled(Box)`
   padding: 10px 0 10px 0;
 `
 interface ClockSettingsProps extends DrawerProps {
   settings?: UserSettings
-  onSettingUpdate?: (setting: Object) => void
+  onSettingUpdate: (setting: Object) => void
 }
 
 const ClockSettings: React.FC<ClockSettingsProps> = ({
   settings = DefaultUserSettings,
-  onSettingUpdate = null,
+  onSettingUpdate,
   ...rest
 }) => {
   const [timeFormat, setTimeFormat] = useState('24h')

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
 import Box from '@material-ui/core/Box'
+import React from 'react'
+import styled from 'styled-components'
 import ClockKK from '../../components/Clock'
 import DateDisplay from '../../components/DateDisplay'
 import { DefaultUserSettings, UserSettings } from '../../types/types'
