@@ -9,6 +9,7 @@ remote changes 2 3 4
 
 rebase changes 1
 rebase changes 1 2
+rebase changes 1 2 3
 ## Available Scripts
 
 In the project directory, you can run:
