@@ -8,6 +8,7 @@ Demo URL: https://f1982.github.io/silent-ticking/
 remote changes 2 3 4
 
 rebase changes 1
+rebase changes 1 2
 ## Available Scripts
 
 In the project directory, you can run:
