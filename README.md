@@ -1,7 +1,6 @@
 # Getting Started with Create React App
 
 tom update-3 time 1,
-rebase-test-3, update time 1,
 rebase-test-3, update time 1, 2
 
 tom update time 1,
