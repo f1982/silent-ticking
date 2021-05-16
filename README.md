@@ -2,7 +2,7 @@
 ----
 rebase test 6: 
 tom update 1
-andy update 1, 2
+andy update 1, 2, 3
 ----
 rebase test 5
 tom update 1
