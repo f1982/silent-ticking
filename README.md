@@ -2,6 +2,7 @@
 
 rebase-test-4
 tom: change 1
+andy change 1, 2, 3, 4
 
 tom update-3 time 1,
 rebase-test-3, update time 1, 2
