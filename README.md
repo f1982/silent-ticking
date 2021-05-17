@@ -3,8 +3,6 @@
 ----
 rebase t7
 andy update 1, 2
-----
-rebase t7
 tom update 1
 ----
 rebase test 6: 
