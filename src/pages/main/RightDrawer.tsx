@@ -168,6 +168,7 @@ const RightDrawer: React.FC<RightDrawerProps> = ({
           </Button>
         </SettingRow>
         <Box>
+          <Typography>Version: {process.env.REACT_APP_VERSION}</Typography>
           <Typography>Copyright 2020</Typography>
         </Box>
       </Box>
