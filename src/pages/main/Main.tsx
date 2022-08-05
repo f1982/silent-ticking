@@ -1,15 +1,20 @@
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
+import Drawer from '@material-ui/core/Drawer'
 import IconButton from '@material-ui/core/IconButton'
 import FullscreenIcon from '@material-ui/icons/Fullscreen'
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit'
 import MenuIcon from '@material-ui/icons/Menu'
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder'
+import TimerIcon from '@material-ui/icons/Timer'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import ClockKK from '../../components/Clock'
-import DateDisplay from '../../components/DateDisplay'
-import { DefaultUserSettings, UserSettings } from '../../types/settings'
-import RightDrawer from './RightDrawer'
+import SettingCommon from '../../components/SettingCommon'
+import { DefaultUserSettings, UserSettings } from '../../types/types'
+import ClockSettings from '../clock/ClockSettings'
+import ClockPage from '../clock/index'
+import Pomodoro from '../pomodoro/index'
+import PomodoroSettings from '../pomodoro/PomodoroSettings'
 
 const Wrapper = styled(Container)`
   display: flex;
@@ -28,7 +33,7 @@ const TopToolBar = styled.div`
   position: absolute;
   padding: 3rem;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
 `
 
 const ToolButton = styled(IconButton)`
@@ -43,13 +48,14 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = ({ fullscreenHandler }) => {
   const [openDraw, setOpenDraw] = useState(false)
+  const [current, setCurrent] = useState('clock')
   const [userSettings, setUserSettings] = useState<UserSettings>(
     DefaultUserSettings
   )
 
-  const handleSettingsUpdate = (setting: Object) => {
-    const newSettings = { ...userSettings, ...setting }
-    setUserSettings(newSettings!)
+  const handleSettingUpdate = (setting: object) => {
+    // update specific option of setting
+    setUserSettings(DefaultUserSettings)
   }
 
   const getMenuButton = () => {
@@ -63,6 +69,21 @@ const Main: React.FC<MainProps> = ({ fullscreenHandler }) => {
         </ToolButton>
       )
     }
+  }
+
+  const getShiftButton = () => {
+    return (
+      <ToolButton
+        onClick={() => {
+          setCurrent(flag => (flag === 'clock' ? 'pomodoro' : 'clock'))
+        }}>
+        {current === 'clock' ? (
+          <QueryBuilderIcon color='primary' fontSize='large' />
+        ) : (
+          <TimerIcon color='primary' fontSize='large' />
+        )}
+      </ToolButton>
+    )
   }
 
   const getFullscreenButton = () => {
@@ -84,29 +105,30 @@ const Main: React.FC<MainProps> = ({ fullscreenHandler }) => {
   return (
     <Wrapper maxWidth={false}>
       <TopToolBar>
-        {getMenuButton()}
+        {getShiftButton()}
+        <Box flex={1} />
         {getFullscreenButton()}
+        {getMenuButton()}
       </TopToolBar>
 
       <Box p={3} style={{ fontFamily: userSettings.fontFamily }}>
-        <Box textAlign='left' pl={2}>
-          {userSettings.showDate && <DateDisplay />}
-        </Box>
-        <ClockKK
-          hourFormat={userSettings.timeFormat}
-          showSecond={userSettings.showSecond}
-          blinkSeparator={userSettings.blinkSeparator}
-        />
+        {current === 'clock' ? <ClockPage /> : <Pomodoro />}
       </Box>
 
-      <RightDrawer
-        settings={userSettings}
+      <Drawer
         open={openDraw}
-        onSettingUpdate={handleSettingsUpdate}
+        anchor='right'
         onClose={() => {
           setOpenDraw(false)
-        }}
-      />
+        }}>
+        <SettingCommon>
+          {current === 'clock' ? (
+            <ClockSettings onSettingUpdate={handleSettingUpdate} />
+          ) : (
+            <PomodoroSettings />
+          )}
+        </SettingCommon>
+      </Drawer>
     </Wrapper>
   )
 }

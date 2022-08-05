@@ -16,7 +16,7 @@
     },
     "secondary": {
       "light": "#ff4081",
-      "main": "#FFFFFF",
+      "main": "#00DEDC",
       "dark": "#c51162",
       "contrastText": "#fff"
     },
